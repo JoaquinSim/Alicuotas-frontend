@@ -1,0 +1,14 @@
+<app-dashboard></app-dashboard>
+<p-table [value]="catalogues" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+      <tr *ngFor="let year of catalogues">
+          <th *ngIf="year.code=='año'">{{year.name}}</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+      <tr>
+
+      </tr>
+  </ng-template>
+</p-table>
+

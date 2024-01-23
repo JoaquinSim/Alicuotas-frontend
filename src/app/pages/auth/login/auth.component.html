@@ -1,0 +1,27 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="flex flex-column h-6rem p-8 m-6">
+    <p-card
+      header="Login"
+      [style]="{ width: '360px' }"
+      class="flex align-items-center justify-content-center"
+    >
+      <div class="field">
+        <label for="email">Email:</label>
+        <input pInputText id="email" formControlName="email" class="w-20rem" />
+      </div>
+
+      <div class="field">
+        <label for="password">Contraseña:</label>
+        <p-password
+          id="password"
+          formControlName="password"
+          [feedback]="false"
+          [maxLength]="9"
+          [inputStyle]="{ width: '320px' }"
+        ></p-password>
+      </div>
+
+      <p-button label="Submit" (click)="onSubmit()"></p-button>
+    </p-card>
+  </div>
+</form>
