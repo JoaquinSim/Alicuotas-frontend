@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
 import { UsersHttpService } from 'src/app/services/user.service';
 
@@ -14,7 +15,7 @@ export class UserListComponent implements OnInit{
   protected state: any;
  u:any;
   protected search: FormControl = new FormControl('');
-  constructor(private userService: UsersHttpService,
+  constructor(private userService: UsersHttpService, private router: Router,
 ){
 
   }
@@ -29,4 +30,19 @@ export class UserListComponent implements OnInit{
       });
   }
 
+  updateUser(id: string){
+    localStorage.setItem(
+      'id',
+      JSON.stringify(id)
+    );
+    this.router.navigate(['dashboard/user/form']);
+  }
+
+  deleteUser(){
+
+  }
+
+  crear(){
+    this.router.navigate(['dashboard/user/form']);
+  }
 }

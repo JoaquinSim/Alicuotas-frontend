@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { environment } from 'env';
+import { UpdateUserDto, UserModel } from '../models/user.model';
+import { ServerResponse } from './login.service';
 
 
 @Injectable({
@@ -36,26 +38,25 @@ export class UsersHttpService {
     );
   }
 
-//   findOne(id: string): Observable<UserModel> {
-//     const url = `${this.API_URL}/${id}`;
+  findOne(id: string): Observable<UserModel> {
+    const url = `${this.API_URL}/${id}`;
 
-//     return this.httpClient.get<ServerResponse>(url).pipe(
-//       map(response => {
-//         return response.data;
-//       })
-//     );
-//   }
+    return this.httpClient.get<ServerResponse>(url).pipe(
+      map(response => {
+        return response.data;
+      })
+    );
+  }
 
-//   update(id: string, payload: UpdateUserDto): Observable<UserModel> {
-//     const url = `${this.API_URL}/${id}`;
+  update(id: string, payload: UpdateUserDto): Observable<UserModel> {
+    const url = `${this.API_URL}/${id}`;
 
-//     return this.httpClient.put<ServerResponse>(url, payload).pipe(
-//       map(response => {
-//         this.messageService.success(response);
-//         return response.data;
-//       })
-//     );
-//   }
+    return this.httpClient.put<ServerResponse>(url, payload).pipe(
+      map(response => {
+        return response.data;
+      })
+    );
+  }
 
 //   reactivate(id: string): Observable<UserModel> {
 //     const url = `${this.API_URL}/${id}/reactivate`;

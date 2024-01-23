@@ -6,11 +6,13 @@ import { LoteListComponent } from './pages/core/lote/lote-list/lote-list.compone
 import { AlicuotaListComponent } from './pages/core/alicuota/alicuota-list/alicuota-list.component';
 import { DashboardComponent } from './pages/core/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
+import { UserFormComponent } from './pages/auth/user/user-form/user-form.component';
 
 const routes: Routes = [
   {path:'' , component: AuthComponent},
   {path:'dashboard' , component: DashboardComponent, canActivate: [AuthGuard]},
   {path:'dashboard/user' , component: UserListComponent, canActivate: [AuthGuard]},
+  {path:'dashboard/user/form' , component: UserFormComponent, canActivate: [AuthGuard]},
   {path:'dashboard/lote' , component: LoteListComponent, canActivate: [AuthGuard]},
   {path:'dashboard/ali' , component: AlicuotaListComponent, canActivate: [AuthGuard]},
 ];

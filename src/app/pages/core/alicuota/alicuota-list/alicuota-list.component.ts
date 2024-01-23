@@ -13,6 +13,7 @@ import { LoteModel } from 'src/app/models/lote.model';
   templateUrl: './alicuota-list.component.html',
   styleUrls: ['./alicuota-list.component.css'],
 })
+
 export class AlicuotaListComponent implements OnInit {
   protected time: TimeModel[] = [];
   protected lote: LoteModel[] = [];

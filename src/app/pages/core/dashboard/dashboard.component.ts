@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { UserModel } from 'src/app/models/user.model';
+import { UsersHttpService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +10,10 @@ import { MenuItem } from 'primeng/api';
 })
 export class DashboardComponent {
   items: MenuItem[] | any;
+  user: UserModel[] | any
+    constructor(private userService: UsersHttpService){
+
+    }
 
   ngOnInit() {
       this.items = [
@@ -131,5 +137,10 @@ export class DashboardComponent {
       ];
   }
 
-
+  findUser(){
+    this.userService.findAll().subscribe((res)=>{
+        this.user = res.data
+    })
+  }
+  
 }
