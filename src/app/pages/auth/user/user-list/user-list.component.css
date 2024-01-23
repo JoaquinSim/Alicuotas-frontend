@@ -1,0 +1,13 @@
+.menu{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    width: 250px;
+    height: 100vh;
+    color:white;
+}
+.table{
+    position: relative;
+    left: 260px;
+    bottom: 100vh;
+}

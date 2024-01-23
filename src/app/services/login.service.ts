@@ -26,12 +26,6 @@ export class AuthHttpService {
     return this.httpClient.post<ServerResponse>(url, credentials)
       .pipe(
         map(response => {
-        //   this.authService.token = response.data.accessToken;
-        //   this.authService.auth = response.data.user;
-        //   this.authService.roles = response.data.user.roles;
-        //   this.institutionsService.institutions = response.data.user.institutions;
-        //   this.careersService.careers = response.data.user.careers;
-        //   this.schoolPeriodsService.openSchoolPeriod = response.data.schoolPeriod;
         console.log(response)
           return response;
         })

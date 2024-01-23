@@ -1,3 +1,14 @@
+<div class="menu">
+    <div class="bar">
+        <ul>
+            <li><a routerLink="/dashboard/user" class="nav-link" href="#">Usuarios</a></li>
+            <li><a class="nav-link" href="#">Lotes</a></li>
+            <li><a routerLink="/dashboard/ali" class="nav-link" href="#">Alicuotas</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="table">
 <p-table
   dataKey="id"
   [value]="users"
@@ -25,5 +36,6 @@
     </tr>
 </ng-template>
 </p-table>
+</div>
 <!-- {{columns | json}}
 {{users | json}} -->

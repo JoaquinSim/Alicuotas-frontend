@@ -1,4 +1,11 @@
-p-panelMenu{
-    position: absolute;
-    z-index: 1;
+.menu{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    width: 250px;
+    height: 100vh;
+    color:white;
+}
+li{
+    
 }

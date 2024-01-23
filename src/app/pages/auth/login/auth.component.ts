@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import { Message, PrimeIcons } from 'primeng/api';
 import { AuthHttpService } from 'src/app/services/login.service';
-import Swal from 'sweetalert2'
-import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -25,9 +25,8 @@ export class AuthComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authHttpService: AuthHttpService,
-     private route: Router )
-
-  {
+    private route: Router
+  ) {
     this.form = this.newForm();
     this.messages = [
       {
@@ -55,20 +54,25 @@ export class AuthComponent {
         title: 'Error!',
         text: 'Verifique todos los campos',
         icon: 'error',
-        confirmButtonText: 'Cool'
-      })
+        confirmButtonText: 'Cool',
+      });
     }
   }
 
   login() {
-    this.authHttpService.login(this.form.value).subscribe((response) => {
-      console.log(response);
-      sessionStorage.setItem(
-        'accessToken',
-        JSON.stringify(response.data.accessToken)
-      );
-    });
-    this.route.navigate(['/ali']);
+    this.authHttpService.login(this.form.value).subscribe(
+      (response) => {
+        console.log(response);
+        sessionStorage.setItem(
+          'accessToken',
+          JSON.stringify(response.data.accessToken)
+        );
+        this.route.navigate(['dashboard/ali']);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   /** Getters **/

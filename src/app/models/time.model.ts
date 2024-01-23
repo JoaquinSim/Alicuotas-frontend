@@ -1,9 +1,10 @@
 import { CatalogueModel } from "./catalogue.model";
 import { DetailModel } from "./detail.model";
+import { UserModel } from "./user.model";
 
 export interface TimeModel {
     id: string;
-    yaer: CatalogueModel;
+    year: CatalogueModel;
     detail: DetailModel;
   }
   

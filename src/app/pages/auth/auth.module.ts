@@ -59,7 +59,7 @@ import { UserFormComponent } from './user/user-form/user-form.component';
     MessagesModule,
     CardModule,
     ButtonModule,
-    PasswordModule
+    PasswordModule,
   ],
   providers: [],
   bootstrap: [AuthComponent]
