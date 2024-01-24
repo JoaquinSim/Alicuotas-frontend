@@ -1,6 +1,6 @@
 <main>
 <div class="menu">
-  <h2>Alicuotas</h2>
+  <h1>Alicuotas</h1>
   <div class="bar">
     <ul>
       <li>
@@ -16,9 +16,9 @@
   </div>
   <div class="boton"><button>Cerrar Sesion</button></div>
 </div>
-<h1>Usuarios <button (click)="crear()">Crear</button></h1>
 <div class="table">
-  <p-table dataKey="id" [value]="users" [tableStyle]="{ width: '0rem' }"> 
+  <div class="create"><h1>Usuarios</h1><p-button (click)="crear()">Crear</p-button></div>
+  <p-table dataKey="id" [value]="users" > 
     <ng-template pTemplate="header">
       <tr>
       </tr>

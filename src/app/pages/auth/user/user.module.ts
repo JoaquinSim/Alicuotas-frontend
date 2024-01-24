@@ -33,12 +33,14 @@ import {AvatarModule} from "primeng/avatar";
 import {FileUploadModule} from "primeng/fileupload";
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { DashboardComponent } from '../../../shared/dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
     UserListComponent,
     UserFormComponent,
+    
   ],
   imports: [
     NgCommonModule,

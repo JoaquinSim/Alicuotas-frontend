@@ -1,27 +1,32 @@
 <main>
-<app-dashboard></app-dashboard>
-<div class="table">
-  <p-table [value]="lote" [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template pTemplate="header">
+  <app-dashboard></app-dashboard>
+  <div class="main">
+    <div class="create">
       <tr>
-        <h1>Alicuotas <button (click)="crear()">Crear</button></h1>
-    </tr>
-      <tr>
-        <th>Usuario</th>
-        <th>Numero de lote</th>
-        <th>Años</th>
-        <th>Meses</th>
-        <th>Acciones</th>
+        <h1>Alicuotas</h1>
       </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-lote>
       <tr>
-        <th>{{ lote.user.name }}</th>
-        <th>{{ lote.number }}</th>
-        <th>{{ lote.time.year.name}}</th>
-        <th>{{lote.time.detail.mounth.name}}</th>
+        <p-button (click)="crear()">Crear</p-button>
       </tr>
-    </ng-template>
-  </p-table>
-</div>
+    </div>
+    <p-table [value]="lote" class="table">
+      <ng-template pTemplate="header" class="header">
+        <tr>
+          <th>Usuario</th>
+          <th>Numero de lote</th>
+          <th>Años</th>
+          <th>Meses</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-lote class="body">
+        <tr>
+          <th>{{ lote.user.name }}</th>
+          <th>{{ lote.number }}</th>
+          <th>{{ lote.time.year.name }}</th>
+          <th>{{ lote.time.detail.mounth.name }}</th>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </main>

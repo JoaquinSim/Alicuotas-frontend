@@ -4,7 +4,7 @@ import { AuthComponent } from './pages/auth/login/auth.component';
 import { UserListComponent } from './pages/auth/user/user-list/user-list.component';
 import { LoteListComponent } from './pages/core/lote/lote-list/lote-list.component';
 import { AlicuotaListComponent } from './pages/core/alicuota/alicuota-list/alicuota-list.component';
-import { DashboardComponent } from './pages/core/dashboard/dashboard.component';
+import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { UserFormComponent } from './pages/auth/user/user-form/user-form.component';
 import { AlicuotaFormComponent } from './pages/core/alicuota/alicuota-form/alicuota-form.component';

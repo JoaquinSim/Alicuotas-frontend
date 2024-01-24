@@ -2,9 +2,23 @@ main{
     display: flex;
 }
 
+.main{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 .table{
+    width: 95%;
+    height: 95%;
     display: block;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    height: 100vh;
+}
+.create{
+    margin: 10px;
+    width: 94%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
 }

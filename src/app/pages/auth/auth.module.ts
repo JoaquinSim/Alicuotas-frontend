@@ -28,6 +28,8 @@ import { CardModule } from 'primeng/card';
 import { UserModule } from './user/user.module';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
+import { DashboardComponent } from '../../shared/dashboard/dashboard.component';
+import { AppModule } from 'src/app/app.module';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,7 @@ import { UserFormComponent } from './user/user-form/user-form.component';
     MessagesModule,
     CardModule,
     ButtonModule,
-    PasswordModule,
+    PasswordModule
   ],
   providers: [],
   bootstrap: [AuthComponent]

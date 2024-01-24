@@ -32,7 +32,7 @@ import { LoteFormComponent } from './pages/core/lote/lote-form/lote-form.compone
 import { LoteListComponent } from './pages/core/lote/lote-list/lote-list.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { TableModule } from 'primeng/table';
-import { DashboardComponent } from './pages/core/dashboard/dashboard.component';
+import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { CardModule } from 'primeng/card';
 
@@ -76,6 +76,7 @@ import { CardModule } from 'primeng/card';
     PanelMenuModule,
     CardModule
   ],
+  exports:[DashboardComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
