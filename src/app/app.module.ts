@@ -34,6 +34,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { TableModule } from 'primeng/table';
 import { DashboardComponent } from './pages/core/dashboard/dashboard.component';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { CardModule } from 'primeng/card';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { PanelMenuModule } from 'primeng/panelmenu';
     ReactiveFormsModule,
     MessagesModule,
     TableModule,
-    PanelMenuModule
+    PanelMenuModule,
+    CardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

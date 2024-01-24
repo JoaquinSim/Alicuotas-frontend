@@ -1,9 +1,10 @@
+<main>
 <app-dashboard></app-dashboard>
 <div class="table">
   <p-table [value]="lote" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
       <tr>
-        <h1>Alicuotas</h1>
+        <h1>Alicuotas <button (click)="crear()">Crear</button></h1>
     </tr>
       <tr>
         <th>Usuario</th>
@@ -23,7 +24,4 @@
     </ng-template>
   </p-table>
 </div>
-
-<!-- <div *ngFor="let item of lote">
-    <div>{{item.year.code}}</div>
-</div> -->
+</main>

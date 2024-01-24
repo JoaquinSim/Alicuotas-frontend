@@ -1,4 +1,21 @@
-<p>user-form works!</p>
+<main>
+<div class="menu">
+  <h2>Alicuotas</h2>
+  <div class="bar">
+    <ul>
+      <li>
+        <a routerLink="/dashboard/user" class="nav-link" href="#">Usuarios</a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/lote" class="nav-link" href="#">Lotes</a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/ali" class="nav-link" href="#">Alicuotas</a>
+      </li>
+    </ul>
+  </div>
+  <div class="boton"><button>Cerrar Sesion</button></div>
+</div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="flex flex-column h-6rem p-8 m-6">
       <p-card
@@ -31,3 +48,4 @@
       </p-card>
     </div>
   </form>
+</main>

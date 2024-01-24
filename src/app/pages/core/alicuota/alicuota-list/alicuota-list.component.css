@@ -1,5 +1,10 @@
+main{
+    display: flex;
+}
+
 .table{
-    position: relative;
-    left: 260px;
-    bottom: 100vh;
+    display: block;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 100vh;
 }

@@ -7,6 +7,8 @@ import { AlicuotaListComponent } from './pages/core/alicuota/alicuota-list/alicu
 import { DashboardComponent } from './pages/core/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { UserFormComponent } from './pages/auth/user/user-form/user-form.component';
+import { AlicuotaFormComponent } from './pages/core/alicuota/alicuota-form/alicuota-form.component';
+import { LoteFormComponent } from './pages/core/lote/lote-form/lote-form.component';
 
 const routes: Routes = [
   {path:'' , component: AuthComponent},
@@ -14,7 +16,10 @@ const routes: Routes = [
   {path:'dashboard/user' , component: UserListComponent, canActivate: [AuthGuard]},
   {path:'dashboard/user/form' , component: UserFormComponent, canActivate: [AuthGuard]},
   {path:'dashboard/lote' , component: LoteListComponent, canActivate: [AuthGuard]},
+  {path:'dashboard/lote/form' , component: LoteFormComponent, canActivate: [AuthGuard]},
   {path:'dashboard/ali' , component: AlicuotaListComponent, canActivate: [AuthGuard]},
+  {path:'dashboard/ali/form' , component: AlicuotaFormComponent, canActivate: [AuthGuard]},
+
 ];
 
 @NgModule({

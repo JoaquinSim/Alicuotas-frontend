@@ -1,0 +1,33 @@
+.menu{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    width: 250px;
+    height: 100vh;
+    color:white;
+
+}
+h1{
+    margin-left: 10px;
+}
+.bar{
+    margin-left: 20px;
+    margin-top: 30px;
+    width: 100px;
+}
+a{
+    color: white;
+    text-decoration: none;
+    transition: .3s;
+}
+li{
+    list-style:none;
+    margin: 5px;
+}
+a:hover{
+    margin-left: 25px;
+}
+
+main{
+    display: flex;
+}

@@ -7,6 +7,7 @@ import { TimeService } from 'src/app/services/time.service';
 import { DetailModel } from 'src/app/models/detail.model';
 import { TimeModel } from 'src/app/models/time.model';
 import { LoteModel } from 'src/app/models/lote.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alicuota-list',
@@ -27,6 +28,7 @@ export class AlicuotaListComponent implements OnInit {
     private loteService: LoteService,
     private timeService: TimeService,
     private cataloguesService: CatalogueService,
+    private route: Router
   ) {}
   ngOnInit(): void {
     this.findCatalogeus();
@@ -80,6 +82,9 @@ export class AlicuotaListComponent implements OnInit {
       console.log(this.lote)
 
     });
+  }
+  crear(){
+    this.route.navigate(['dashboard/ali/form']);
   }
   // calendarOptions: CalendarOptions = {
   //   plugins: [multiMonthPlugin],

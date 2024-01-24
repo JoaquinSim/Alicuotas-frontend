@@ -7,11 +7,7 @@
     color:white;
 
 }
-h1{
-    position: relative;
-    left: 300px;
-    bottom: 100vh;
-}
+
 .bar{
     margin-left: 20px;
     margin-top: 30px;
@@ -32,9 +28,9 @@ a:hover{
 .table{
     display: block;
     overflow-y: scroll;
-    position: relative;
-    left: 300px;
-    bottom: 100vh;
     scroll-behavior: smooth;
     height: 100vh;
+}
+main{
+    display: flex;
 }
