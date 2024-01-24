@@ -66,6 +66,7 @@ export class AuthComponent {
         sessionStorage.setItem(
           'accessToken',
           JSON.stringify(response.data.accessToken)
+          
         );
         this.route.navigate(['dashboard/ali']);
       },
