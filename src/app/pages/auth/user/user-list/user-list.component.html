@@ -39,7 +39,7 @@
         <td>{{ users.cellPhone }}</td>
         <td>{{ users.email }}</td>
         <td>
-            <p-button label="Eliminar" severity="danger" (click)="deleteUser()"></p-button>
+            <p-button label="Eliminar" severity="danger" (click)="deleteUser(users.id)"></p-button>
             <p-button label="Actualizar" severity="info" (click)="updateUser(users.id)"></p-button>
         </td>
       </tr>

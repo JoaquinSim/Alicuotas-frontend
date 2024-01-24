@@ -1,49 +1,79 @@
 <main>
-<div class="menu">
-  <h2>Alicuotas</h2>
-  <div class="bar">
-    <ul>
-      <li>
-        <a routerLink="/dashboard/user" class="nav-link" href="#">Usuarios</a>
-      </li>
-      <li>
-        <a routerLink="/dashboard/lote" class="nav-link" href="#">Lotes</a>
-      </li>
-      <li>
-        <a routerLink="/dashboard/ali" class="nav-link" href="#">Alicuotas</a>
-      </li>
-    </ul>
+  <div class="menu">
+    <h2>Alicuotas</h2>
+    <div class="bar">
+      <ul>
+        <li>
+          <a routerLink="/dashboard/user" class="nav-link" href="#">Usuarios</a>
+        </li>
+        <li>
+          <a routerLink="/dashboard/lote" class="nav-link" href="#">Lotes</a>
+        </li>
+        <li>
+          <a routerLink="/dashboard/ali" class="nav-link" href="#">Alicuotas</a>
+        </li>
+      </ul>
+    </div>
+    <div class="boton"><button>Cerrar Sesion</button></div>
   </div>
-  <div class="boton"><button>Cerrar Sesion</button></div>
-</div>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="card">
+      <h1>Usuarios</h1>
+      <div class="fields">
+      
 
-    <div class="flex flex-column h-6rem p-8 m-6">
-<div class="card">
-  <h1>Usuarios</h1>
-        <div class="field">
-          <label for="email">Email:</label>
-          <input pInputText id="email" formControlName="email" class="w-20rem" />
-        </div>
-  
-        <div class="field">
-            <label for="name">Nombres:</label>
-            <input pInputText id="name" formControlName="name" class="w-20rem" />
-          </div>
+      <div class="field">
+        <label for="identification">Cedula:</label><br>
+        <input
+          pInputText
+          id="identification"
+          formControlName="identification"
+          class="w-20rem"
+        />
+      </div>
+      <div class="field">
+        <label for="name">Nombres:</label><br>
+        <input pInputText id="name" formControlName="name" class="w-20rem" />
+      </div>
 
-          <div class="field">
-            <label for="lastname">Apellidos:</label>
-            <input pInputText id="lastname" formControlName="lastname" class="w-20rem" />
-          </div>
+      <div class="field">
+        <label for="lastname">Apellidos:</label><br>
+        <input
+          pInputText
+          id="lastname"
+          formControlName="lastname"
+          class="w-20rem"
+        />
+      </div>
+      <div class="field">
+        <label for="cellPhone">Telefono:</label><br>
+        <input pInputText id="email" formControlName="cellPhone" class="w-20rem" />
+      </div>
 
-          <div class="field">
-            <label for="identification">Cedula:</label>
-            <input pInputText id="identification" formControlName="identification" class="w-20rem" />
-          </div>
+      <div class="field">
+        <label for="email">Email:</label><br>
+        <input pInputText id="email" formControlName="email" class="w-20rem" />
+      </div>
 
-        <p-button label="Submit" (click)="onSubmit()" severity="success"></p-button>
-        <p-button label="Cancelar" (click)="close()" severity="warning"></p-button>
-        </div>
+      <div class="field">
+        <label for="state">Habita:</label><br>
+        <p-dropdown formControlName="state" [options]="state" optionLabel="name" placeholder="Seleccione el estado"></p-dropdown>
+      </div>
+
+      <div class="botones">
+        <p-button
+          label="Aceptar"
+          severity="success"
+          (click)="onSubmit()"
+        ></p-button>
+        <p-button
+          label="Cancelar"
+          (click)="close()"
+          severity="warning"
+        ></p-button>
+      </div>
+    </div>
+
     </div>
   </form>
 </main>

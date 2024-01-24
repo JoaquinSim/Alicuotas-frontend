@@ -1,5 +1,10 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersHttpService } from 'src/app/services/user.service';
 import { UserListComponent } from '../user-list/user-list.component';
@@ -8,12 +13,14 @@ import { UserModel } from 'src/app/models/user.model';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.css']
+  styleUrls: ['./user-form.component.css'],
 })
 export class UserFormComponent {
-  id?: any; 
+  id?: any;
   form: FormGroup;
   user?: UserModel;
+
+  state: any[] | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,45 +28,46 @@ export class UserFormComponent {
     private route: Router
   ) {
     this.form = this.newForm();
-    this.findUser()
+    this.findUser();
+    this.state = [false, true];
   }
 
   newForm(): FormGroup {
     return this.formBuilder.group({
-      // username: ['reviewer', [Validators.required]],
       email: [null, [Validators.required]],
-      // password: ['12345678', [Validators.required]],
       name: [null, [Validators.required]],
       lastname: [null, [Validators.required]],
       identification: [null, [Validators.required]],
+      cellPhone: [null, [Validators.required]],
+      state: [null, [Validators.required]],
     });
   }
 
-  findUser(){
+  findUser() {
     this.id = JSON.parse(String(localStorage.getItem('id')));
-    this.userService.findOne(this.id).subscribe((res) =>{
-      console.log(res)
-      this.user = res
+    this.userService.findOne(this.id).subscribe((res) => {
+      console.log(res);
+      this.user = res;
       this.form.patchValue(res);
-    })
+    });
   }
 
-  create(user: UserModel){
+  create(user: UserModel) {
     this.userService.create(user).subscribe(() => {
       this.form.reset();
       this.close();
     });
   }
 
-  update(user: UserModel){
+  update(user: UserModel) {
     this.id = JSON.parse(String(localStorage.getItem('id')));
     this.userService.update(this.id, user).subscribe(() => {
       this.form.reset();
-      this.close()
+      this.close();
     });
   }
 
-  close(){
+  close() {
     localStorage.removeItem('id');
     this.route.navigate(['dashboard/user']);
   }
@@ -72,4 +80,7 @@ export class UserFormComponent {
     }
   }
 
+  get stateField(): AbstractControl {
+    return this.form.controls['state'];
+  }
 }

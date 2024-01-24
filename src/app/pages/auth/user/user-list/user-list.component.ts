@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
 import { UsersHttpService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -38,8 +39,25 @@ export class UserListComponent implements OnInit{
     this.router.navigate(['dashboard/user/form']);
   }
 
-  deleteUser(){
-
+  deleteUser(id: string){
+    Swal.fire({
+      title: "Esta seguro de eliminar este usuario",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Eliminar",
+      denyButtonText: `Cancelar`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.userService.remove(id).subscribe(() =>{
+          Swal.fire("Eliminado!", "", "success");
+          window.location.reload();
+        })
+      } else if (result.isDenied) {
+        Swal.fire("Cancelado", "", "info");
+      }
+    });
+  
   }
 
   crear(){
