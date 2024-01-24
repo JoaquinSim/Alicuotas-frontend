@@ -35,7 +35,7 @@ import { TableModule } from 'primeng/table';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { CardModule } from 'primeng/card';
-
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -74,7 +74,8 @@ import { CardModule } from 'primeng/card';
     MessagesModule,
     TableModule,
     PanelMenuModule,
-    CardModule
+    CardModule,
+    InputNumberModule
   ],
   exports:[DashboardComponent],
   providers: [],

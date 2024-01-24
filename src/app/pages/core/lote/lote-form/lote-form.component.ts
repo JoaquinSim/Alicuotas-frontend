@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CatalogueModel } from 'src/app/models/catalogue.model';
 import { LoteModel } from 'src/app/models/lote.model';
+import { TimeModel } from 'src/app/models/time.model';
 import { UserModel } from 'src/app/models/user.model';
 import { LoteService } from 'src/app/services/lote.service';
+import { TimeService } from 'src/app/services/time.service';
 import { UsersHttpService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,29 +19,32 @@ export class LoteFormComponent {
   form: FormGroup;
   lote?: LoteModel;
   users: UserModel[] = [];
-  userId: any[] | undefined;
+  time: TimeModel[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private loteService: LoteService,
     private route: Router,
-    private userService: UsersHttpService
+    private userService: UsersHttpService,
+    private timeService: TimeService
   ) {
     this.form = this.newForm();
     this.findUser()
     this.findUsers()
+    this.findTime()
   }
 
   newForm(): FormGroup {
     return this.formBuilder.group({
       number: [null, [Validators.required]],
-      user: [null, [Validators.required]]
+      user: [null, [Validators.required]],
+      time:[null, [Validators.required]]
     });
   }
 
   findUsers(){
     this.userService.findAll().subscribe((res) =>{
-      this.users = res
+      this.users = res.data
     })
   }
   findUser(){
@@ -46,10 +52,13 @@ export class LoteFormComponent {
     this.loteService.findOne(this.id).subscribe((res) =>{
       console.log(res)
       this.lote = res
-      this.userId = [
-        {user : this.users}
-      ];
       this.form.patchValue(res);
+    })
+  }
+
+  findTime(){
+    this.timeService.findAll().subscribe((res) =>{
+      this.time = res.data
     })
   }
 

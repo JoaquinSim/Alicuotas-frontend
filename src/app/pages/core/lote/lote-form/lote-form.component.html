@@ -12,7 +12,12 @@
 
         <div class="field">
           <label for="user">Propietario:</label><br>
-          <p-dropdown formControlName="user" [options]="userId" optionLabel="name" placeholder="Seleccione un propietario"></p-dropdown>
+          <p-dropdown formControlName="user" [options]="users" optionLabel="name" placeholder="Seleccione un propietario"></p-dropdown>
+        </div>
+
+        <div class="field">
+          <label for="time">Año:</label><br>
+          <p-dropdown formControlName="time" [options]="time" optionLabel="year.name" placeholder="Seleccione el año"></p-dropdown>
         </div>
 
         <p-button label="Submit" (click)="onSubmit()" severity="success"></p-button>

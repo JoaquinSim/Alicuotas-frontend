@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { UsersHttpService } from 'src/app/services/user.service';
 import { UserListComponent } from '../user-list/user-list.component';
 import { UserModel } from 'src/app/models/user.model';
+import { CatalogueModel } from 'src/app/models/catalogue.model';
+import { CatalogueService } from 'src/app/services/catalogue.service';
 
 @Component({
   selector: 'app-user-form',
@@ -19,17 +21,18 @@ export class UserFormComponent {
   id?: any;
   form: FormGroup;
   user?: UserModel;
-
-  state: any[] | undefined;
+  state: CatalogueModel[]
+  states: CatalogueModel[] = []
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersHttpService,
-    private route: Router
+    private route: Router,
+    private catalogueService: CatalogueService
   ) {
     this.form = this.newForm();
     this.findUser();
-    this.state = [false, true];
+    this.findCatalogues()
   }
 
   newForm(): FormGroup {
@@ -43,13 +46,24 @@ export class UserFormComponent {
     });
   }
 
+
   findUser() {
     this.id = JSON.parse(String(localStorage.getItem('id')));
     this.userService.findOne(this.id).subscribe((res) => {
-      console.log(res);
       this.user = res;
       this.form.patchValue(res);
     });
+  }
+
+  findCatalogues(){
+    this.catalogueService.findAll().subscribe((res) => {
+      this.state = res.data
+      this.state.forEach((state) => {
+      if(state.code === 'state'){
+        this.states.push(state)
+      }
+      })
+    })
   }
 
   create(user: UserModel) {

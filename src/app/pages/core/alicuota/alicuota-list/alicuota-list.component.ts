@@ -86,6 +86,15 @@ export class AlicuotaListComponent implements OnInit {
   crear(){
     this.route.navigate(['dashboard/ali/form']);
   }
+
+  updateAlicuota(id: string){
+    localStorage.setItem(
+      'id',
+      JSON.stringify(id)
+    );
+    this.route.navigate(['dashboard/ali/form']);
+  }
+
   // calendarOptions: CalendarOptions = {
   //   plugins: [multiMonthPlugin],
   //   initialView: 'multiMonthFourMonth',

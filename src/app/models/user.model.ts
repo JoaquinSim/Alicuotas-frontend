@@ -1,3 +1,5 @@
+import { CatalogueModel } from "./catalogue.model";
+
 export interface UserModel {
   id: string;
   email: string;
@@ -7,7 +9,7 @@ export interface UserModel {
   password: string;
   cellPhone: string;
   suspendedAt: Date;
-  state: boolean
+  state: CatalogueModel
 }
 
 export interface CreateUserDto extends Omit<UserModel, 'id'> {
