@@ -1,32 +1,72 @@
 <main>
-<app-dashboard></app-dashboard>
-<div class="main">
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="table">
-      <p-card
-        header="Lote"
-        [style]="{ width: '360px' }"
-        class="flex align-items-center justify-content-center"
-      >
-        <div class="field">
-          <label for="number">Numero de lote:</label>
-          <input pInputText id="number" formControlName="number" class="w-20rem" />
-        </div>
+  <app-dashboard></app-dashboard>
+  <div class="main">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="table">
+        <p-card
+          header="Lote"
+          [style]="{ width: '360px' }"
+          class="flex align-items-center justify-content-center"
+        >
+          <div class="field">
+            <label for="number">Numero de lote:</label>
+            <input
+              pInputText
+              id="number"
+              formControlName="number"
+              class="w-20rem"
+            />
+          </div>
 
-        <div class="field">
-          <label for="user">Propietario:</label><br>
-          <p-dropdown formControlName="user" [options]="users" optionLabel="name" placeholder="Seleccione un propietario"></p-dropdown>
-        </div>
+          <div class="field">
+            <label for="user">Propietario:</label><br />
+            <p-dropdown
+              formControlName="user"
+              [options]="users"
+              optionLabel="name"
+              placeholder="Seleccione un propietario"
+            ></p-dropdown>
+          </div>
 
-        <div class="field">
-          <label for="time">Año:</label><br>
-          <p-dropdown formControlName="time" [options]="time" optionLabel="year.name" placeholder="Seleccione el año"></p-dropdown>
-        </div>
+          <div class="field">
+            <label for="time">Año:</label><br />
+            <p-dropdown
+              formControlName="time"
+              [options]="time"
+              optionLabel="year.name"
+              placeholder="Seleccione el año"
+            ></p-dropdown>
+          </div>
 
-        <p-button label="Submit" (click)="onSubmit()" severity="success"></p-button>
-        <p-button label="Cancelar" (click)="close()" severity="warning"></p-button>
-      </p-card>
-    </div>
-</form>
-</div>
+          <form [formGroup]="detail">
+            <div class="field">
+              <label for="mount">Monto a pagar:</label>
+              <input
+                pInputText
+                id="mount"
+                formControlName="mount"
+                class="w-20rem"
+              />
+            </div>
+            <p-button
+              label="Agregar Monto"
+              (click)="updateMoutn()"
+              severity="info"
+            ></p-button>
+            </form>
+
+          <p-button
+            label="Submit"
+            (click)="onSubmit()"
+            severity="success"
+          ></p-button>
+          <p-button
+            label="Cancelar"
+            (click)="close()"
+            severity="warning"
+          ></p-button>
+        </p-card>
+      </div>
+    </form>
+  </div>
 </main>

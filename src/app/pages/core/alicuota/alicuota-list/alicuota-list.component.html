@@ -12,10 +12,10 @@
     <p-table [value]="lote" class="table">
       <ng-template pTemplate="header" class="header">
         <tr>
-          <th>Usuario</th>
+          <th>Propietario</th>
           <th>Numero de lote</th>
-          <th>Años</th>
-          <th>Meses</th>
+          <th>Meses deuda</th>
+          <th>Monto a pagar</th>
           <th>Acciones</th>
         </tr>
       </ng-template>
@@ -23,8 +23,8 @@
         <tr>
           <th>{{ lote.user.name }}</th>
           <th>{{ lote.number }}</th>
-          <th>{{ lote.time.year.name }}</th>
-          <th>{{ lote.time.detail.mounth.name }}</th>
+          <th>{{ this.mounths.length | json }}</th>
+          <th>{{ lote.time.detail.mount }}</th>
           <th>
             <!-- <p-button
               label="Eliminar"

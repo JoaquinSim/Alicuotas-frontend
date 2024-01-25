@@ -7,8 +7,8 @@
           <ng-template pTemplate="header">
             <tr>
               <th>Numero de lote</th>
-              <th>Usuario</th>
-              <th>Años</th>
+              <th>Propietario</th>
+              <th>Monto a pagar</th>
               <th>Acciones</th>
             </tr>
           </ng-template>
@@ -16,7 +16,7 @@
             <tr>
               <th>{{ lote.number }}</th>
               <th>{{ lote.user.name }}</th>
-              <th>{{ lote.time.year.name }}</th>
+              <th>{{ lote.time.detail.mount }}</th>
               <td>
                   <p-button label="Eliminar" severity="danger" (click)="deleteLote()"></p-button>
                   <p-button label="Actualizar" severity="info" (click)="updateLote(lote.id)"></p-button>

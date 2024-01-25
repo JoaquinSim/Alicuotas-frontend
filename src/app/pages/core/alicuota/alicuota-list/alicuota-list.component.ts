@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
   templateUrl: './alicuota-list.component.html',
   styleUrls: ['./alicuota-list.component.css'],
 })
-
 export class AlicuotaListComponent implements OnInit {
   protected time: TimeModel[] = [];
   protected lote: LoteModel[] = [];
@@ -23,6 +22,8 @@ export class AlicuotaListComponent implements OnInit {
   protected year: CatalogueModel[] = [];
   protected mounth: CatalogueModel[] = [];
   protected details: DetailModel[] = [];
+  protected mounths: any[] = [];
+
   constructor(
     private detailService: DetailService,
     private loteService: LoteService,
@@ -33,81 +34,72 @@ export class AlicuotaListComponent implements OnInit {
   ngOnInit(): void {
     this.findCatalogeus();
     this.findAll();
-    this.filterYaers()
-    this.findLotes()
+    this.filterYaers();
+    this.findLotes();
+    this.filterMounths();
+    this.findDetail()
   }
 
   findAll() {
     this.timeService.findAll().subscribe((response) => {
       this.time = response.data;
-      this.time.sort((a, b) => a.year.sort - b.detail.mounth.sort);    });
+      this.time.sort((a, b) => a.year.sort - b.detail.mounth.sort);
+    });
   }
 
   findDetail() {
     this.detailService.findAll().subscribe((res) => {
-      this.details = res.data;
+      this.details = res;
+      this.details.forEach((pay) =>{
+        if(pay.pay === false){
+          this.mounths.push(pay)
+        }
+      })
     });
   }
 
   findCatalogeus() {
     this.cataloguesService.findAll().subscribe((res) => {
       this.catalogues = res.data;
-      this.catalogues.forEach((year) =>{
-        if(year.code == "año"){
-          this.catalogues.push(year)
-          localStorage.setItem('year', JSON.stringify(this.catalogues))
+      this.catalogues.forEach((year) => {
+        if (year.code == 'año') {
+          this.catalogues.push(year);
+          localStorage.setItem('year', JSON.stringify(this.catalogues));
         }
       });
-      this.catalogues.forEach((mounth) =>{
-        if(mounth.code == "mes"){
-          this.catalogues.push(mounth)
-          localStorage.setItem('mounth', JSON.stringify(this.catalogues))
+      this.catalogues.forEach((mounth) => {
+        if (mounth.code == 'mes') {
+          this.catalogues.push(mounth);
+          localStorage.setItem('mounth', JSON.stringify(this.catalogues));
         }
-      })
+      });
     });
   }
 
-  filterYaers(){
+  filterYaers() {
     this.year = JSON.parse(String(localStorage.getItem('year')));
     this.year.sort((a, b) => a.sort - b.sort);
     this.mounth = JSON.parse(String(localStorage.getItem('mounth')));
     this.mounth.sort((a, b) => a.sort - b.sort);
   }
-  
 
-  findLotes(){
+  filterMounths() {
+
+  }
+
+  findLotes() {
     this.loteService.findAll().subscribe((res) => {
       this.lote = res.data;
       this.lote.sort((a, b) => a.time.detail.mounth.sort - b.time.year.sort);
-      console.log(this.lote)
-
     });
   }
-  crear(){
+
+  crear() {
     this.route.navigate(['dashboard/ali/form']);
   }
 
-  updateAlicuota(id: string){
-    localStorage.setItem(
-      'id',
-      JSON.stringify(id)
-    );
+  updateAlicuota(id: string) {
+    localStorage.setItem('id', JSON.stringify(id));
     this.route.navigate(['dashboard/ali/form']);
   }
-
-  // calendarOptions: CalendarOptions = {
-  //   plugins: [multiMonthPlugin],
-  //   initialView: 'multiMonthFourMonth',
-  //   views: {
-  //     multiMonthFourMonth: {
-  //       type: 'multiMonth',
-  //       duration: { months: 12 },
-  //     },
-  //   },
-  //   headerToolbar: {
-  //     left: 'prev,next',
-  //     center: 'title',
-  //     right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek,listDay',
-  //   },
-  // };
 }

@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { environment } from 'env';
+import { DetailModel, UpdateDetailDto } from '../models/detail.model';
+import { ServerResponse } from './login.service';
 
 
 @Injectable({
@@ -14,7 +16,7 @@ export class DetailService {
   constructor(private httpClient: HttpClient) {
   }
 
-  create(payload: any): Observable<any> {
+  create(payload: any): Observable<DetailModel> {
     const url = `${this.API_URL}`;
 
     return this.httpClient.post<any>(url, payload).pipe(
@@ -24,7 +26,7 @@ export class DetailService {
     );
   }
 
-  findAll(): Observable<any> {
+  findAll(): Observable<DetailModel[]> {
     const url = this.API_URL;
 
     const headers = new HttpHeaders().append('pagination', 'true');
@@ -36,26 +38,25 @@ export class DetailService {
     );
   }
 
-//   findOne(id: string): Observable<UserModel> {
-//     const url = `${this.API_URL}/${id}`;
+  findOne(id: string): Observable<DetailModel> {
+    const url = `${this.API_URL}/${id}`;
 
-//     return this.httpClient.get<ServerResponse>(url).pipe(
-//       map(response => {
-//         return response.data;
-//       })
-//     );
-//   }
+    return this.httpClient.get<ServerResponse>(url).pipe(
+      map(response => {
+        return response.data;
+      })
+    );
+  }
 
-//   update(id: string, payload: UpdateUserDto): Observable<UserModel> {
-//     const url = `${this.API_URL}/${id}`;
+  update(id: string, payload: UpdateDetailDto): Observable<DetailModel> {
+    const url = `${this.API_URL}/${id}`;
 
-//     return this.httpClient.put<ServerResponse>(url, payload).pipe(
-//       map(response => {
-//         this.messageService.success(response);
-//         return response.data;
-//       })
-//     );
-//   }
+    return this.httpClient.put<ServerResponse>(url, payload).pipe(
+      map(response => {
+        return response.data;
+      })
+    );
+  }
 
 //   reactivate(id: string): Observable<UserModel> {
 //     const url = `${this.API_URL}/${id}/reactivate`;

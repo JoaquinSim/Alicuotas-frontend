@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoteModel } from 'src/app/models/lote.model';
 import { LoteService } from 'src/app/services/lote.service';
 import { TimeService } from 'src/app/services/time.service';
 import { UsersHttpService } from 'src/app/services/user.service';
@@ -11,7 +12,7 @@ import { UsersHttpService } from 'src/app/services/user.service';
   styleUrls: ['./lote-list.component.css']
 })
 export class LoteListComponent implements OnInit{
-  protected lote: any[] = []
+  protected lote: LoteModel[] = []
   protected user: any[] = []
   protected time:any[] = []
   constructor(private loteService: LoteService,
