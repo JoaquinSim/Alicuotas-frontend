@@ -3,9 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CatalogueModel } from 'src/app/models/catalogue.model';
 import { LoteModel } from 'src/app/models/lote.model';
+import { TimeModel } from 'src/app/models/time.model';
 import { UserModel } from 'src/app/models/user.model';
 import { CatalogueService } from 'src/app/services/catalogue.service';
 import { LoteService } from 'src/app/services/lote.service';
+import { TimeService } from 'src/app/services/time.service';
 import { UsersHttpService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,7 +18,7 @@ import { UsersHttpService } from 'src/app/services/user.service';
 export class AlicuotaFormComponent {
   id?: any;
   form: FormGroup;
-  lote: LoteModel;
+  lote: LoteModel[] = [];
   lotes: LoteModel[] = [];
   users: UserModel[] = [];
   years: CatalogueModel[] = [];
@@ -24,13 +26,15 @@ export class AlicuotaFormComponent {
   mounths: CatalogueModel[] = [];
   mounthss: CatalogueModel[] = [];
   userId: any[] | undefined;
+  time: TimeModel[] = []
 
   constructor(
     private formBuilder: FormBuilder,
     private loteService: LoteService,
     private route: Router,
     private userService: UsersHttpService,
-    private catalogueService: CatalogueService
+    private catalogueService: CatalogueService,
+    private timeService: TimeService
   ) {
     this.form = this.newForm();
     this.findLotes();
@@ -38,15 +42,13 @@ export class AlicuotaFormComponent {
     this.findYears();
     this.findMounths()
     this.findLote()
+    this.findTime()
   }
 
   newForm(): FormGroup {
     return this.formBuilder.group({
       number: [null, [Validators.required]],
-      year: [null, [Validators.required]],
-      mounth: [null, [Validators.required]],
-      mount: [null, [Validators.required]],
-      user: [null, [Validators.required]],
+      time: [null, [Validators.required]],
     });
   }
 
@@ -89,8 +91,16 @@ export class AlicuotaFormComponent {
   findLote(){
     this.id = JSON.parse(String(localStorage.getItem('id')));
     this.loteService.findOne(this.id).subscribe((res) =>{
-      this.lote = res      
+      this.lote.push(res)     
+      console.log(this.lote)
       this.form.patchValue(res); 
+    })
+  }
+
+  findTime(){
+    this.timeService.findAll().subscribe((res) =>{
+      this.time = res.data
+      console.log(this.time)
     })
   }
 

@@ -47,6 +47,7 @@ export class LoteFormComponent {
       this.users = res.data
     })
   }
+  
   findUser(){
     this.id = JSON.parse(String(localStorage.getItem('id')));
     this.loteService.findOne(this.id).subscribe((res) =>{
