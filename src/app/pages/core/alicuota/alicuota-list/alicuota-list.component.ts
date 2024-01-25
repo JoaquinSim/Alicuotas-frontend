@@ -36,8 +36,7 @@ export class AlicuotaListComponent implements OnInit {
     this.findAll();
     this.filterYaers();
     this.findLotes();
-    this.filterMounths();
-    this.findDetail()
+    this.findDetail();
   }
 
   findAll() {
@@ -48,13 +47,29 @@ export class AlicuotaListComponent implements OnInit {
   }
 
   findDetail() {
-    this.detailService.findAll().subscribe((res) => {
-      this.details = res;
-      this.details.forEach((pay) =>{
-        if(pay.pay === false){
-          this.mounths.push(pay)
+    let nopay: CatalogueModel;
+    this.cataloguesService.findAll().subscribe((res) => {
+      this.catalogues = res.data;
+      this.catalogues.forEach((pay) => {
+        if (pay.name == 'Sin pagar') {
+          nopay = pay;
         }
-      })
+      });
+    });
+
+    this.detailService.findAll().subscribe((res) => {
+      this.details = res.data;
+      this.details.forEach((pay) => {
+        this.loteService.findAll().subscribe((res) => {
+          this.lote = res.data;
+          this.lote.forEach((detail) =>{
+            if(pay.pay === detail.time.detail.pay){
+              console.log(detail.time.detail)
+              this.mounths.push(detail.time.detail.pay)
+            }
+          })
+        });
+      });
     });
   }
 
@@ -81,10 +96,6 @@ export class AlicuotaListComponent implements OnInit {
     this.year.sort((a, b) => a.sort - b.sort);
     this.mounth = JSON.parse(String(localStorage.getItem('mounth')));
     this.mounth.sort((a, b) => a.sort - b.sort);
-  }
-
-  filterMounths() {
-
   }
 
   findLotes() {

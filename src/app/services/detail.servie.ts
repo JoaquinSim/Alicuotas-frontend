@@ -26,7 +26,7 @@ export class DetailService {
     );
   }
 
-  findAll(): Observable<DetailModel[]> {
+  findAll(): Observable<any> {
     const url = this.API_URL;
 
     const headers = new HttpHeaders().append('pagination', 'true');

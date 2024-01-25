@@ -5,7 +5,7 @@ export interface DetailModel {
     mounth: CatalogueModel;
     mount: number;
     code: string;
-    pay: boolean;
+    pay: CatalogueModel;
   }
   
   export interface CreateDetailDto extends Omit<DetailModel, 'id'> {

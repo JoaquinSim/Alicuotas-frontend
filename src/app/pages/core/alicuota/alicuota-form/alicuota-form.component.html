@@ -4,32 +4,9 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="table">
           <h1>Alicuota</h1>
-          <div class="fields">
-
-            <div class="field">
-                <label for="number">Numero de lote:</label><br>
-                <input pInputText id="number" formControlName="number" class="w-20rem" [readonly]="true"/>
-                <p-dropdown formControlName="number" [options]="lotes" optionLabel="number" placeholder="Seleccione el lote"></p-dropdown>
-              </div>
-
           <div class="field">
-            <label for="time">Año:</label><br>
-            <p-dropdown formControlName="time" [options]="time" optionLabel="year.name" placeholder="Seleccione el año"></p-dropdown>
-          </div>
-    
-          <div class="field">
-            <label for="time">Mes:</label><br>
-            <p-dropdown formControlName="time" [options]="time" optionLabel="detail.mounth.name" placeholder="Seleccione el mes"></p-dropdown>
-          </div>
-
-          <div class="field">
-            <label for="time">Usuario:</label><br>
-            <p-dropdown formControlName="user" [options]="users" optionLabel="name" placeholder="Seleccione el mes"></p-dropdown>
-          </div>
-
-          <div class="field">
-            <label for="mount">Monto:</label><br>
-            <p-inputNumber formControlName="time" [showButtons]="true" inputId="stacked" mode="currency" currency="USD"> </p-inputNumber>
+            <label for="pay">Estado de pago:</label><br>
+            <p-dropdown formControlName="pay" [options]="pays" optionLabel="name" placeholder="Seleccione el estado"></p-dropdown>
           </div>
     
           <div class="botones">
@@ -38,9 +15,12 @@
               severity="success"
               (click)="onSubmit()"
             ></p-button>
+            <p-button
+            label="Cancelar"
+            (click)="close()"
+            severity="warning"
+          ></p-button>
           </div>
-        </div>
-    
         </div>
       </form>
   </div>

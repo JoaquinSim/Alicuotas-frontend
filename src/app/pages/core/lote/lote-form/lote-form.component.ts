@@ -10,6 +10,7 @@ import { DetailService } from 'src/app/services/detail.servie';
 import { LoteService } from 'src/app/services/lote.service';
 import { TimeService } from 'src/app/services/time.service';
 import { UsersHttpService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lote-form',
@@ -122,14 +123,29 @@ export class LoteFormComponent {
     });
   }
 
-  updateMoutn() {
+  updateMount() {
     this.id = JSON.parse(String(localStorage.getItem('id')));
-    this.loteService.findOne(this.id).subscribe((res) => {
-      this.lote = res;
-      console.log(this.detail.value);
-      this.detailService
-        .update(this.lote.time.detail.id, this.detail.value)
-        .subscribe(() => {});
+    Swal.fire({
+      title: "Agregar monto?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Agregar",
+      denyButtonText: `Cancelar`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.loteService.findOne(this.id).subscribe((res) => {
+          this.lote = res;
+          console.log(this.detail.value);
+          this.detailService
+            .update(this.lote.time.detail.id, this.detail.value)
+            .subscribe(() => {
+              Swal.fire("Monto agregado!", "", "success");
+            });
+        });
+      } else if (result.isDenied) {
+        Swal.fire("Cancelado", "", "info");
+      }
     });
   }
 
