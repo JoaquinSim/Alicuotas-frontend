@@ -49,6 +49,7 @@ export class AlicuotaFormComponent {
     return this.formBuilder.group({
       number: [null, [Validators.required]],
       time: [null, [Validators.required]],
+      user: [null, [Validators.required]],
     });
   }
 

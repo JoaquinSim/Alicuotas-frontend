@@ -97,4 +97,10 @@ export class UserFormComponent {
   get stateField(): AbstractControl {
     return this.form.controls['state'];
   }
+
+  
+  cerrarSesion(){
+    localStorage.removeItem('id');
+    this.route.navigate(['']);
+  }
 }

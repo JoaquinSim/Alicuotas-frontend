@@ -63,4 +63,10 @@ export class UserListComponent implements OnInit{
   crear(){
     this.router.navigate(['dashboard/user/form']);
   }
+
+  
+  cerrarSesion(){
+    localStorage.removeItem('id');
+    this.router.navigate(['']);
+  }
 }

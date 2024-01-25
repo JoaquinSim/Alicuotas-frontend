@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { UserModel } from 'src/app/models/user.model';
 import { UsersHttpService } from 'src/app/services/user.service';
@@ -11,7 +12,7 @@ import { UsersHttpService } from 'src/app/services/user.service';
 export class DashboardComponent {
   items: MenuItem[] | any;
   user: UserModel[] | any
-    constructor(private userService: UsersHttpService){
+    constructor(private userService: UsersHttpService, private route: Router){
 
     }
 
@@ -141,6 +142,12 @@ export class DashboardComponent {
     this.userService.findAll().subscribe((res)=>{
         this.user = res.data
     })
+  }
+
+  
+  cerrarSesion(){
+    localStorage.removeItem('id');
+    this.route.navigate(['']);
   }
   
 }

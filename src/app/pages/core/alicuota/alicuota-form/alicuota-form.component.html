@@ -23,8 +23,13 @@
           </div>
 
           <div class="field">
+            <label for="time">Usuario:</label><br>
+            <p-dropdown formControlName="user" [options]="users" optionLabel="name" placeholder="Seleccione el mes"></p-dropdown>
+          </div>
+
+          <div class="field">
             <label for="mount">Monto:</label><br>
-            <p-inputNumber formControlName="mount" [showButtons]="true" inputId="stacked" mode="currency" currency="USD"> </p-inputNumber>
+            <p-inputNumber formControlName="time" [showButtons]="true" inputId="stacked" mode="currency" currency="USD"> </p-inputNumber>
           </div>
     
           <div class="botones">
