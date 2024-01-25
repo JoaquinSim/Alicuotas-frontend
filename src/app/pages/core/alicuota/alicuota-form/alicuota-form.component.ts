@@ -16,6 +16,7 @@ import { UsersHttpService } from 'src/app/services/user.service';
 export class AlicuotaFormComponent {
   id?: any;
   form: FormGroup;
+  lote: LoteModel;
   lotes: LoteModel[] = [];
   users: UserModel[] = [];
   years: CatalogueModel[] = [];
@@ -36,6 +37,7 @@ export class AlicuotaFormComponent {
     this.findUsers();
     this.findYears();
     this.findMounths()
+    this.findLote()
   }
 
   newForm(): FormGroup {
@@ -43,6 +45,7 @@ export class AlicuotaFormComponent {
       number: [null, [Validators.required]],
       year: [null, [Validators.required]],
       mounth: [null, [Validators.required]],
+      mount: [null, [Validators.required]],
       user: [null, [Validators.required]],
     });
   }
@@ -78,11 +81,16 @@ export class AlicuotaFormComponent {
   }
 
   findLotes() {
-    this.id = JSON.parse(String(localStorage.getItem('id')));
     this.loteService.findAll().subscribe((res) =>{
-      this.lotes = res.data 
-      console.log(res.data);
-      
+      this.lotes = res.data      
+    })
+  }
+
+  findLote(){
+    this.id = JSON.parse(String(localStorage.getItem('id')));
+    this.loteService.findOne(this.id).subscribe((res) =>{
+      this.lote = res      
+      this.form.patchValue(res); 
     })
   }
 
@@ -103,7 +111,7 @@ export class AlicuotaFormComponent {
 
   close() {
     localStorage.removeItem('id');
-    this.route.navigate(['dashboard/lote']);
+    this.route.navigate(['dashboard/ali']);
   }
 
   onSubmit() {

@@ -1,7 +1,10 @@
+<main>
+<app-dashboard></app-dashboard>
+<div class="main">
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="flex flex-column h-6rem p-8 m-6">
+    <div class="table">
       <p-card
-        header="Login"
+        header="Lote"
         [style]="{ width: '360px' }"
         class="flex align-items-center justify-content-center"
       >
@@ -24,4 +27,6 @@
         <p-button label="Cancelar" (click)="close()" severity="warning"></p-button>
       </p-card>
     </div>
-  </form>
+</form>
+</div>
+</main>
