@@ -8,6 +8,7 @@
             <tr>
               <th>Numero de lote</th>
               <th>Propietario</th>
+              <th>Habita</th>
               <th>Monto a pagar</th>
               <th>Acciones</th>
             </tr>
@@ -16,6 +17,7 @@
             <tr>
               <th>{{ lote.number }}</th>
               <th>{{ lote.user.name }}</th>
+              <th>{{ lote.user.state.name }}</th>
               <th>{{ lote.time.detail.mount }}</th>
               <td>
                   <p-button label="Eliminar" severity="danger" (click)="deleteLote(lote.id)"></p-button>

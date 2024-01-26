@@ -23,6 +23,7 @@ export class LoteFormComponent {
   number?: any;
   form: FormGroup;
   detail: FormGroup;
+  timefomr: FormGroup;
   lote?: LoteModel;
   lotes?: LoteModel[] = [];
   user: UserModel;
@@ -31,6 +32,7 @@ export class LoteFormComponent {
   catalogues: CatalogueModel[] = [];
   years: CatalogueModel[] = [];
   mounths: CatalogueModel[] = [];
+  pay: CatalogueModel;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,6 +45,7 @@ export class LoteFormComponent {
   ) {
     this.form = this.newForm();
     this.detail = this.detailForm();
+    this.timefomr = this.timeForm();
     this.findUser();
     this.findUsers();
     this.findTime();
@@ -59,7 +62,29 @@ export class LoteFormComponent {
 
   detailForm(): FormGroup {
     return this.formBuilder.group({
+      mounth: [null, [Validators.required]],
       mount: [null, [Validators.required]],
+      code: ['new', [Validators.required]],
+      pay: [
+        {
+          id: 'cbe3edb5-0a10-4b3b-9a33-8dbd91c29680',
+          createdAt: '2024-01-26T03:45:48.117Z',
+          updatedAt: '2024-01-26T03:45:48.117Z',
+          deletedAt: null,
+          parentId: null,
+          code: 'pay',
+          name: 'Sin pagar',
+          sort: 2,
+        },
+        [Validators.required],
+      ],
+    });
+  }
+
+  timeForm(): FormGroup {
+    return this.formBuilder.group({
+      year: [null, [Validators.required]],
+      detail: [null, [Validators.required]],
     });
   }
 
@@ -102,31 +127,44 @@ export class LoteFormComponent {
           this.mounths.push(time);
           this.mounths.sort((a, b) => a.sort - b.sort);
         }
+
+        if (time.name === 'Sin pagar') {
+          this.pay = time;
+          console.log(time);
+        }
       });
     });
   }
 
   create(lote: LoteModel) {
     let usuario: UserModel;
-    this.loteService.findAll().subscribe((res) => {
-      this.lotes = res.data;
-      this.lotes.forEach((num) => {
-        if (lote.number == num.number) {
-          usuario = num.user;
-          console.log(usuario);
-          if (lote.user.id == usuario.id) {
-            alert('La propiedad ya esta ocupada');
-          } else {
-            console.log(lote);
-          }
-        } else {
-          this.loteService.create(lote).subscribe((res) => {
-            this.form.reset();
-            this.close();
-            localStorage.setItem('idDetail', JSON.stringify(res.data.id));
-          });
-        }
-      });
+    // this.loteService.findAll().subscribe((res) => {
+    //   this.lotes = res.data;
+    //   this.lotes.forEach((num) => {
+    //     if (lote.number == num.number) {
+    //       usuario = num.user;
+    //       console.log(usuario);
+    //       if (lote.user.id == usuario.id) {
+    //         alert('La propiedad ya esta ocupada');
+    //       } else {
+    //         console.log(lote);
+    //       }
+    //     } else {
+    //       this.loteService.create(lote).subscribe((res) => {
+    //         this.form.reset();
+    //         this.close();
+    //         localStorage.setItem('idDetail', JSON.stringify(res.data.id));
+    //       });
+    //     }
+    //   });
+    // });
+
+    this.loteService.create(lote).subscribe((res) => {
+      this.form.reset();
+      this.form.patchValue(res.data);
+
+      //this.close();
+      localStorage.setItem('idDetail', JSON.stringify(res.data.id));
     });
   }
 
@@ -166,6 +204,20 @@ export class LoteFormComponent {
       } else if (result.isDenied) {
         Swal.fire('Cancelado', '', 'info');
       }
+    });
+  }
+
+  createTIme() {
+    this.timeService.create(this.timefomr.value).subscribe((res) => {
+      this.form.patchValue(res.data);
+      document.getElementById('time').style.display="none"; 
+    });
+  }
+
+  createDetail() {
+    this.detailService.create(this.detail.value).subscribe((res) => {
+      this.form.patchValue(res);
+      document.getElementById('detail').style.display="none"; 
     });
   }
 

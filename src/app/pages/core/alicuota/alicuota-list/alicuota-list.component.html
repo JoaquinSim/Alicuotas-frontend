@@ -11,8 +11,9 @@
         <tr>
           <th>Propietario</th>
           <th>Numero de lote</th>
-          <th>Meses deuda</th>
+          <th>Mes actual de deuda</th>
           <th>Monto a pagar</th>
+          <th>Estado</th>
           <th>Acciones</th>
         </tr>
       </ng-template>
@@ -20,8 +21,9 @@
         <tr>
           <th>{{ lote.user.name }}</th>
           <th>{{ lote.number }}</th>
-          <th>{{ this.mounths.length | json }}</th>
+          <th>{{ lote.time.detail.mounth.name }}</th>
           <th>{{ lote.time.detail.mount }}</th>
+          <th>{{ lote.time.detail.pay.name }}</th>
           <th>
             <!-- <p-button
               label="Eliminar"

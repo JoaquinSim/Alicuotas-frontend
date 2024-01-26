@@ -8,6 +8,54 @@
           [style]="{ width: '360px' }"
           class="flex align-items-center justify-content-center"
         >
+          <form [formGroup]="detail">
+            <div class="field">
+              <label for="mounth">mes:</label><br />
+              <p-dropdown
+                formControlName="mounth"
+                [options]="mounths"
+                optionLabel="name"
+                placeholder="Seleccione el mes"
+              ></p-dropdown>
+            </div>
+
+            <div class="field">
+              <label for="mount">Monto a pagar:</label>
+              <input
+                pInputText
+                id="mount"
+                formControlName="mount"
+                class="w-20rem"
+              />
+            </div>
+            <p-button
+            label="Agregar el Detalle"
+            (click)="createDetail()"
+            severity="info"
+            id="detail"
+          ></p-button>
+          </form>
+
+          <form [formGroup]="timefomr">
+            <div class="field">
+              <div class="field">
+                <label for="year">Año:</label><br />
+                <p-dropdown
+                  formControlName="time"
+                  [options]="years" 
+                  optionLabel="name"
+                  placeholder="Seleccione el año"
+                ></p-dropdown>
+              </div>
+            </div>
+            <p-button
+            label="Agregar El año"
+            (click)="createTIme()"
+            severity="info"
+            id="time"
+          ></p-button>
+          </form>
+
           <div class="field">
             <label for="number">Numero de lote:</label>
             <input
@@ -27,44 +75,6 @@
               placeholder="Seleccione un propietario"
             ></p-dropdown>
           </div>
-
-          <div class="field">
-            <label for="time">Año:</label><br />
-            <p-dropdown
-              formControlName="time"
-              [options]="years"
-              optionLabel="name"
-              placeholder="Seleccione el año"
-            ></p-dropdown>
-          </div>
-
-          <div class="field">
-            <label for="time">Mes:</label><br />
-            <p-dropdown
-              formControlName="time"
-              [options]="mounths"
-              optionLabel="name"
-              placeholder="Seleccione el mes"
-            ></p-dropdown>
-          </div>
-
-          <form [formGroup]="detail">
-            <div class="field">
-              <label for="mount">Monto a pagar:</label>
-              <input
-                pInputText
-                id="mount"
-                formControlName="mount"
-                class="w-20rem"
-              />
-            </div>
-            <p-button
-              label="Agregar Monto"
-              (click)="updateMount()"
-              severity="info"
-            ></p-button>
-            </form>
-
           <p-button
             label="Submit"
             (click)="onSubmit()"
