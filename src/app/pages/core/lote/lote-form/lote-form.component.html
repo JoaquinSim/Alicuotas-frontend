@@ -41,7 +41,7 @@
               <div class="field">
                 <label for="year">Año:</label><br />
                 <p-dropdown
-                  formControlName="time"
+                  formControlName="year"
                   [options]="years" 
                   optionLabel="name"
                   placeholder="Seleccione el año"
@@ -79,6 +79,7 @@
             label="Submit"
             (click)="onSubmit()"
             severity="success"
+            id="lote"
           ></p-button>
           <p-button
             label="Cancelar"

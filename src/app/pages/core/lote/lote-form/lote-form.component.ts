@@ -52,14 +52,6 @@ export class LoteFormComponent {
     this.findDetail();
   }
 
-  newForm(): FormGroup {
-    return this.formBuilder.group({
-      number: [null, [Validators.required]],
-      user: [null, [Validators.required]],
-      time: [null, [Validators.required]],
-    });
-  }
-
   detailForm(): FormGroup {
     return this.formBuilder.group({
       mounth: [null, [Validators.required]],
@@ -76,6 +68,7 @@ export class LoteFormComponent {
           name: 'Sin pagar',
           sort: 2,
         },
+
         [Validators.required],
       ],
     });
@@ -84,7 +77,15 @@ export class LoteFormComponent {
   timeForm(): FormGroup {
     return this.formBuilder.group({
       year: [null, [Validators.required]],
-      detail: [null, [Validators.required]],
+      detail: [],
+    });
+  }
+
+  newForm(): FormGroup {
+    return this.formBuilder.group({
+      number: [null, [Validators.required]],
+      user: [null, [Validators.required]],
+      time: [],
     });
   }
 
@@ -138,34 +139,28 @@ export class LoteFormComponent {
 
   create(lote: LoteModel) {
     let usuario: UserModel;
-    // this.loteService.findAll().subscribe((res) => {
-    //   this.lotes = res.data;
-    //   this.lotes.forEach((num) => {
-    //     if (lote.number == num.number) {
-    //       usuario = num.user;
-    //       console.log(usuario);
-    //       if (lote.user.id == usuario.id) {
-    //         alert('La propiedad ya esta ocupada');
-    //       } else {
-    //         console.log(lote);
-    //       }
-    //     } else {
-    //       this.loteService.create(lote).subscribe((res) => {
-    //         this.form.reset();
-    //         this.close();
-    //         localStorage.setItem('idDetail', JSON.stringify(res.data.id));
-    //       });
-    //     }
-    //   });
-    // });
-
-    this.loteService.create(lote).subscribe((res) => {
-      this.form.reset();
-      this.form.patchValue(res.data);
-
-      //this.close();
-      localStorage.setItem('idDetail', JSON.stringify(res.data.id));
+    this.loteService.findAll().subscribe((res) => {
+      this.lotes = res.data;
+      this.lotes.forEach((num) => {
+        if (lote.number == num.number) {
+          usuario = num.user;
+          console.log(usuario);
+          if (lote.user.id == usuario.id) {
+            alert('La propiedad ya esta ocupada');
+          } else {
+            this.loteService.create(lote).subscribe((res) => {
+              this.form.reset();
+              this.form.patchValue(res.data);
+              localStorage.removeItem('idDetail');
+              localStorage.removeItem('time');
+              this.close();
+            });
+          }
+        }
+      });
     });
+
+
   }
 
   update(lote: LoteModel) {
@@ -208,16 +203,22 @@ export class LoteFormComponent {
   }
 
   createTIme() {
+    let detailId = JSON.parse(
+      String(localStorage.getItem('idDetail'))
+    ) as DetailModel;
+    this.timefomr.value.detail = detailId
     this.timeService.create(this.timefomr.value).subscribe((res) => {
       this.form.patchValue(res.data);
-      document.getElementById('time').style.display="none"; 
+      document.getElementById('time').style.display = 'none';
+      localStorage.setItem('time', JSON.stringify(res));
     });
   }
 
   createDetail() {
     this.detailService.create(this.detail.value).subscribe((res) => {
       this.form.patchValue(res);
-      document.getElementById('detail').style.display="none"; 
+      document.getElementById('detail').style.display = 'none';
+      localStorage.setItem('idDetail', JSON.stringify(res));
     });
   }
 
@@ -230,7 +231,18 @@ export class LoteFormComponent {
     if (this.id) {
       this.update(this.form.value);
     } else {
-      this.create(this.form.value);
+      if (this.form.valid) {
+        let timeId = JSON.parse(String(localStorage.getItem('time'))) as TimeModel;
+        this.form.value.time = timeId
+        this.create(this.form.value);
+      } else {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Verifique todos los campos',
+          icon: 'error',
+          confirmButtonText: 'Cool',
+        });
+      }
     }
   }
 }
