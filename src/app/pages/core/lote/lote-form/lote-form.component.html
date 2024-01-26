@@ -32,9 +32,19 @@
             <label for="time">Año:</label><br />
             <p-dropdown
               formControlName="time"
-              [options]="time"
-              optionLabel="year.name"
+              [options]="years"
+              optionLabel="name"
               placeholder="Seleccione el año"
+            ></p-dropdown>
+          </div>
+
+          <div class="field">
+            <label for="time">Mes:</label><br />
+            <p-dropdown
+              formControlName="time"
+              [options]="mounths"
+              optionLabel="name"
+              placeholder="Seleccione el mes"
             ></p-dropdown>
           </div>
 

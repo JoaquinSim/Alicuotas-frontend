@@ -4,6 +4,7 @@ import { LoteModel } from 'src/app/models/lote.model';
 import { LoteService } from 'src/app/services/lote.service';
 import { TimeService } from 'src/app/services/time.service';
 import { UsersHttpService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -55,6 +56,24 @@ updateLote(id: string){
   this.route.navigate(['dashboard/lote/form']);
 }
 
-deleteLote(){
+deleteLote(id: string){
+  Swal.fire({
+    title: 'Eliminar lote?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Eliminar',
+    denyButtonText: `Cancelar`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      console.log(id)
+      this.loteService.remove(id).subscribe(() =>{
+        Swal.fire("Eliminado!", "", "success");
+        window.location.reload();
+      })
+    } else if (result.isDenied) {
+      Swal.fire('Cancelado', '', 'info');
+    }
+  });
 }
 }

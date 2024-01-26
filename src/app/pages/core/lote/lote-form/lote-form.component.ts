@@ -6,6 +6,7 @@ import { DetailModel } from 'src/app/models/detail.model';
 import { LoteModel } from 'src/app/models/lote.model';
 import { TimeModel } from 'src/app/models/time.model';
 import { UserModel } from 'src/app/models/user.model';
+import { CatalogueService } from 'src/app/services/catalogue.service';
 import { DetailService } from 'src/app/services/detail.servie';
 import { LoteService } from 'src/app/services/lote.service';
 import { TimeService } from 'src/app/services/time.service';
@@ -27,6 +28,9 @@ export class LoteFormComponent {
   user: UserModel;
   users: UserModel[] = [];
   time: TimeModel[] = [];
+  catalogues: CatalogueModel[] = [];
+  years: CatalogueModel[] = [];
+  mounths: CatalogueModel[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,14 +38,15 @@ export class LoteFormComponent {
     private route: Router,
     private userService: UsersHttpService,
     private timeService: TimeService,
-    private detailService: DetailService
+    private detailService: DetailService,
+    private catalogueService: CatalogueService
   ) {
     this.form = this.newForm();
     this.detail = this.detailForm();
     this.findUser();
     this.findUsers();
     this.findTime();
-    this.findDetail()
+    this.findDetail();
   }
 
   newForm(): FormGroup {
@@ -85,6 +90,20 @@ export class LoteFormComponent {
     this.timeService.findAll().subscribe((res) => {
       this.time = res.data;
     });
+    this.catalogueService.findAll().subscribe((res) => {
+      this.catalogues = res.data;
+      this.catalogues.forEach((time) => {
+        if (time.code === 'año') {
+          this.years.push(time);
+          this.years.sort((a, b) => a.sort - b.sort);
+        }
+
+        if (time.code === 'mes') {
+          this.mounths.push(time);
+          this.mounths.sort((a, b) => a.sort - b.sort);
+        }
+      });
+    });
   }
 
   create(lote: LoteModel) {
@@ -99,11 +118,13 @@ export class LoteFormComponent {
             alert('La propiedad ya esta ocupada');
           } else {
             console.log(lote);
-            this.loteService.create(lote).subscribe(() => {
-              this.form.reset();
-              this.close();
-            });
           }
+        } else {
+          this.loteService.create(lote).subscribe((res) => {
+            this.form.reset();
+            this.close();
+            localStorage.setItem('idDetail', JSON.stringify(res.data.id));
+          });
         }
       });
     });
@@ -126,25 +147,24 @@ export class LoteFormComponent {
   updateMount() {
     this.id = JSON.parse(String(localStorage.getItem('id')));
     Swal.fire({
-      title: "Agregar monto?",
+      title: 'Agregar monto?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: "Agregar",
-      denyButtonText: `Cancelar`
+      confirmButtonText: 'Agregar',
+      denyButtonText: `Cancelar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.loteService.findOne(this.id).subscribe((res) => {
           this.lote = res;
-          console.log(this.detail.value);
           this.detailService
             .update(this.lote.time.detail.id, this.detail.value)
             .subscribe(() => {
-              Swal.fire("Monto agregado!", "", "success");
+              Swal.fire('Monto agregado!', '', 'success');
             });
         });
       } else if (result.isDenied) {
-        Swal.fire("Cancelado", "", "info");
+        Swal.fire('Cancelado', '', 'info');
       }
     });
   }

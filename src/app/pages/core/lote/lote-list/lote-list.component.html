@@ -18,7 +18,7 @@
               <th>{{ lote.user.name }}</th>
               <th>{{ lote.time.detail.mount }}</th>
               <td>
-                  <p-button label="Eliminar" severity="danger" (click)="deleteLote()"></p-button>
+                  <p-button label="Eliminar" severity="danger" (click)="deleteLote(lote.id)"></p-button>
                   <p-button label="Actualizar" severity="info" (click)="updateLote(lote.id)"></p-button>
               </td>
             </tr>

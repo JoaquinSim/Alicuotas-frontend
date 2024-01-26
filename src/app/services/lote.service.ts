@@ -57,48 +57,13 @@ export class LoteService {
       })
     );
   }
+  remove(id: string): Observable<LoteModel> {
+    const url = `${this.API_URL}/${id}`;
 
-//   reactivate(id: string): Observable<UserModel> {
-//     const url = `${this.API_URL}/${id}/reactivate`;
-
-//     return this.httpClient.put<ServerResponse>(url, null).pipe(
-//       map((response) => {
-//         this.messageService.success(response);
-//         return response.data;
-//       })
-//     );
-//   }
-
-//   remove(id: string): Observable<UserModel> {
-//     const url = `${this.API_URL}/${id}`;
-
-//     return this.httpClient.delete<ServerResponse>(url).pipe(
-//       map((response) => {
-//         this.messageService.success(response);
-//         return response.data;
-//       })
-//     );
-//   }
-
-//   removeAll(users: UserModel[]): Observable<UserModel[]> {
-//     const url = `${this.API_URL}/remove-all`;
-
-//     return this.httpClient.patch<ServerResponse>(url, users).pipe(
-//       map((response) => {
-//         this.messageService.success(response);
-//         return response.data;
-//       })
-//     );
-//   }
-
-//   suspend(id: string): Observable<UserModel> {
-//     const url = `${this.API_URL}/${id}/suspend`;
-
-//     return this.httpClient.put<ServerResponse>(url, null).pipe(
-//       map((response) => {
-//         this.messageService.success(response);
-//         return response.data;
-//       })
-//     );
-//   }
+    return this.httpClient.delete<ServerResponse>(url).pipe(
+      map((response) => {
+        return response.data;
+      })
+    );
+  }
 }
